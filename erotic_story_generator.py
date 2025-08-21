@@ -11,13 +11,15 @@ app = Flask(__name__)
 
 # Load the model and tokenizer
 model_name = "mistralai/Mistral-7B-Instruct-v0.2"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, use_auth_token=True)
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     device_map="auto",
     torch_dtype=torch.float16,
-    trust_remote_code=True
+    trust_remote_code=True,
+    use_auth_token=True
 )
+
 
 # HTML template with Tailwind CSS styling
 HTML_TEMPLATE = """
